@@ -6,8 +6,22 @@ import { Reveal } from './Reveal';
 export function CaseStudy({ project }: { project: Project }) {
   const Diagram = project.diagram ? diagramMap[project.diagram] : null;
 
+  // Each sheet gets its own pen. Overriding one variable recolours the sheet
+  // number, the rules, the diagram's accent strokes and the links together,
+  // so the section stays coherent while the page gains colour.
+  const pen = (Number(project.sheet) - 1) % 4 + 1;
+
   return (
-    <article className="case" id={project.id}>
+    <article
+      className="case"
+      id={project.id}
+      style={
+        {
+          ['--accent' as string]: `var(--pen-${pen})`,
+          ['--accent-text' as string]: `var(--pen-${pen}-text)`,
+        } as React.CSSProperties
+      }
+    >
       <Reveal className="caseHead">
         <div className="caseSheet">
           <span className="caseNum">{project.sheet}</span>

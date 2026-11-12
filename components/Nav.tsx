@@ -3,6 +3,7 @@ import { ThemeToggle } from './ThemeToggle';
 
 const items = [
   { href: '#work', label: 'Work' },
+  { href: '#sites', label: 'Sites' },
   { href: '#toolkit', label: 'Toolkit' },
   { href: '#about', label: 'About' },
   { href: '#contact', label: 'Contact' },

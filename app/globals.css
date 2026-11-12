@@ -14,8 +14,23 @@
   --ink-faint: #8b9099;
   --rule: rgba(20, 23, 28, 0.16);
   --rule-strong: rgba(20, 23, 28, 0.42);
-  --accent: #c2410c;
-  --accent-soft: rgba(194, 65, 12, 0.1);
+  /* Bright vermilion for linework and anything large. A deeper sibling carries
+     small text, because the vivid one does not clear 4.5:1 at label sizes. */
+  --accent: #ff4d1a;
+  --accent-text: #d03c05;
+  --accent-soft: rgba(255, 77, 26, 0.12);
+
+  /* One pen per sheet. Each case study overrides --accent with its own, so a
+     single variable recolours its number, rules, diagram and links together. */
+  --pen-1: #7c3aed;
+  --pen-1-text: #6926d9;
+  --pen-2: #0b6bff;
+  --pen-2-text: #0b57cc;
+  --pen-3: #00a676;
+  --pen-3-text: #04805d;
+  --pen-4: #ff2d78;
+  --pen-4-text: #d81b5f;
+
   --draw: #14171c;
 
   --font-display: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
@@ -37,8 +52,19 @@
     --ink-faint: #6d8aa3;
     --rule: rgba(141, 203, 240, 0.22);
     --rule-strong: rgba(141, 203, 240, 0.55);
-    --accent: #ff9e5e;
-    --accent-soft: rgba(255, 158, 94, 0.12);
+    --accent: #ff7a45;
+    --accent-text: #ffa178;
+    --accent-soft: rgba(255, 122, 69, 0.16);
+
+    --pen-1: #b794ff;
+    --pen-1-text: #c7adff;
+    --pen-2: #6aa9ff;
+    --pen-2-text: #8dbeff;
+    --pen-3: #2ee6a8;
+    --pen-3-text: #5cefbd;
+    --pen-4: #ff79ab;
+    --pen-4-text: #ff96bf;
+
     --draw: #8dcbf0;
   }
 }
@@ -53,8 +79,19 @@
   --ink-faint: #6d8aa3;
   --rule: rgba(141, 203, 240, 0.22);
   --rule-strong: rgba(141, 203, 240, 0.55);
-  --accent: #ff9e5e;
-  --accent-soft: rgba(255, 158, 94, 0.12);
+  --accent: #ff7a45;
+  --accent-text: #ffa178;
+  --accent-soft: rgba(255, 122, 69, 0.16);
+
+  --pen-1: #b794ff;
+  --pen-1-text: #c7adff;
+  --pen-2: #6aa9ff;
+  --pen-2-text: #8dbeff;
+  --pen-3: #2ee6a8;
+  --pen-3-text: #5cefbd;
+  --pen-4: #ff79ab;
+  --pen-4-text: #ff96bf;
+
   --draw: #8dcbf0;
 }
 
@@ -134,7 +171,7 @@ img {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   line-height: 1.5;
-  color: var(--accent);
+  color: var(--accent-text);
   letter-spacing: 0.02em;
 }
 
@@ -193,7 +230,7 @@ p {
 .sectionHead .num {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: var(--accent);
+  color: var(--accent-text);
   letter-spacing: 0.1em;
   flex: none;
   padding-top: 0.35rem;
@@ -295,7 +332,7 @@ p {
 
 .btn--accent {
   border-color: var(--accent);
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .btn--accent:hover,

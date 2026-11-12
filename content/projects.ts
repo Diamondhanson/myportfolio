@@ -62,7 +62,7 @@ export const projects: readonly Project[] = [
       'Internationalised behind a lint rule that fails CI on any hardcoded string, so a missing translation cannot reach a user.',
     ],
     outcome: [
-      'Live on Google Play and in use.',
+      'Live on the App Store and Google Play, and in use.',
       '56 versioned migrations against a production database, zero manual edits.',
       'English and French complete, four more scaffolded including right-to-left Arabic.',
       'Billing proven against provider sandboxes before any real money moved.',
@@ -78,6 +78,10 @@ export const projects: readonly Project[] = [
     ],
     links: [
       { label: 'seamflowtech.com', href: 'https://www.seamflowtech.com' },
+      {
+        label: 'App Store',
+        href: 'https://apps.apple.com/app/id6826401334',
+      },
       {
         label: 'Google Play',
         href: 'https://play.google.com/store/apps/details?id=com.bambothanson.FashionApp',

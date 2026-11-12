@@ -6,7 +6,7 @@ export function About() {
   return (
     <section className="section" id="about">
       <div className="shell">
-        <SectionHead num="03" title="Notes on the draughtsman" />
+        <SectionHead num="04" title="Notes on the draughtsman" />
 
         <div className="about">
           <Reveal className="aboutText">

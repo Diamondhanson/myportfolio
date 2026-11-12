@@ -214,7 +214,7 @@
   font-weight: 400;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .metricLabel {
@@ -302,7 +302,7 @@
 .caseLink {
   font-family: var(--font-mono);
   font-size: 0.78rem;
-  color: var(--accent);
+  color: var(--accent-text);
   text-decoration: none;
   border-bottom: 1px solid currentColor;
   padding-bottom: 1px;
@@ -341,7 +341,7 @@
 .specNum {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
-  color: var(--accent);
+  color: var(--accent-text);
   padding-top: 0.28rem;
   letter-spacing: 0.06em;
 }
@@ -495,14 +495,14 @@
   align-items: baseline;
   gap: 0.6rem;
   padding-bottom: 0.85rem;
-  border-bottom: 1px solid var(--rule);
+  border-bottom: 2px solid var(--accent);
   margin-bottom: 1rem;
 }
 
 .toolGroupNum {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .toolGroupHead h3 {
@@ -603,7 +603,7 @@
 .timelinePeriod {
   font-family: var(--font-mono);
   font-size: 0.6875rem;
-  color: var(--accent);
+  color: var(--accent-text);
   letter-spacing: 0.06em;
 }
 
@@ -762,4 +762,194 @@
 
 .footerNote {
   margin: 0;
+}
+
+/* ---------- Live sites ---------- */
+
+.sitesLede {
+  margin-top: -1.5rem;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.sitesLede em {
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  color: var(--accent-text);
+}
+
+.siteGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  gap: clamp(1.25rem, 3vw, 2rem);
+}
+
+.siteCard {
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: var(--paper-raised);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.siteCard:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .siteCard:hover {
+    transform: none;
+  }
+}
+
+/* Browser chrome, drawn rather than skeuomorphic. */
+.chrome {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.55rem 0.75rem;
+  border-bottom: 1px solid var(--rule);
+  background: var(--paper);
+}
+
+.chromeDots {
+  display: flex;
+  gap: 0.3rem;
+  flex: none;
+}
+
+.chromeDots i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid var(--rule-strong);
+}
+
+.chromeDots i:first-child {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.chromeUrl {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--ink-faint);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+}
+
+.chromeAction {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid var(--accent);
+  color: var(--accent-text);
+  background: transparent;
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem;
+  cursor: pointer;
+  flex: none;
+  transition: background-color 0.16s ease, color 0.16s ease;
+}
+
+.chromeAction:hover {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+.chromeAction--off {
+  border-color: var(--rule);
+  color: var(--ink-faint);
+  cursor: default;
+}
+
+.chromeAction--off:hover {
+  background: transparent;
+  color: var(--ink-faint);
+}
+
+/* 1440x900 rendered at whatever width the card happens to be. */
+.siteViewport {
+  container-type: inline-size;
+  aspect-ratio: 8 / 5;
+  position: relative;
+  overflow: hidden;
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+}
+
+.siteFrame {
+  position: absolute;
+  inset: 0;
+  width: 1440px;
+  height: 900px;
+  border: 0;
+  /* Dividing by a LENGTH yields the unitless ratio scale() requires.
+     calc(100cqw / 1440) would be a length, and the whole transform is dropped. */
+  transform: scale(calc(100cqw / 1440px));
+  transform-origin: 0 0;
+}
+
+.siteShot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.siteBody {
+  padding: 1.1rem 1.15rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  flex: 1;
+}
+
+.siteTitleRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.siteTitleRow h3 {
+  font-size: 1.1rem;
+}
+
+.siteVisit {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  flex: none;
+}
+
+.siteBlurb {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--ink-muted);
+  flex: 1;
+}
+
+.siteStack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0.2rem 0 0;
 }

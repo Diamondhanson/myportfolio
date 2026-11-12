@@ -71,8 +71,14 @@ export function Hero() {
 
       <div className="shell">
         <Reveal className="metrics" delay={240}>
-          {site.metrics.map((m) => (
-            <div className="metric" key={m.label}>
+          {site.metrics.map((m, i) => (
+            <div
+              className="metric"
+              key={m.label}
+              style={
+                { ['--accent-text' as string]: `var(--pen-${i + 1}-text)` } as React.CSSProperties
+              }
+            >
               <p className="metricValue">
                 {m.value}
                 <span className="metricUnit">{m.unit}</span>

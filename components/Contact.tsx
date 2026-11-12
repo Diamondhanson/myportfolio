@@ -25,7 +25,7 @@ export function Contact() {
   return (
     <section className="section contactSection" id="contact">
       <div className="shell">
-        <SectionHead num="04" title="Get in touch" />
+        <SectionHead num="05" title="Get in touch" />
 
         <div className="contact">
           <Reveal className="contactLead">

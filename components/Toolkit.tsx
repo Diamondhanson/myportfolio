@@ -10,13 +10,22 @@ export function Toolkit() {
   return (
     <section className="section" id="toolkit">
       <div className="shell">
-        <SectionHead num="02" title="Parts list" />
+        <SectionHead num="03" title="Parts list" />
 
         <div className="toolkit">
           {/* The background lives on the cell, not the revealed content, so the
               grid never flashes as a solid block before the cards fade in. */}
           {skillGroups.map((group, gi) => (
-            <div className="toolGroup" key={group.id}>
+            <div
+              className="toolGroup"
+              key={group.id}
+              style={
+                {
+                  ['--accent' as string]: `var(--pen-${gi + 1})`,
+                  ['--accent-text' as string]: `var(--pen-${gi + 1}-text)`,
+                } as React.CSSProperties
+              }
+            >
               <Reveal delay={gi * 90}>
                 <div className="toolGroupHead">
                   <span className="toolGroupNum">{String(gi + 1).padStart(2, '0')}</span>

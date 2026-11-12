@@ -22,6 +22,16 @@ template.
   persists without a flash of the wrong one on reload.
 - **Content is data.** Every fact lives in `content/`, so nothing needs editing
   inside JSX. See [Updating the content](#updating-the-content).
+- **Live sites load on request, not on arrival.** Embedding four third-party
+  sites on page load would mean four extra page loads before a visitor sees
+  anything. Each card shows a captured still and mounts an iframe only when
+  asked, scaled from a 1440px render with container query units. Sites that
+  refuse framing never offer the button.
+- **One pen per sheet.** Each case study and card overrides a single `--accent`
+  variable, which recolours its number, rules, links and diagram strokes
+  together. Vivid values carry linework and large glyphs; a deeper sibling
+  (`--accent-text`) carries small text, which the vivid ones do not pass
+  contrast at.
 
 ## Stack
 
@@ -66,8 +76,10 @@ components/
 content/
   site.ts          Name, metrics, links, skills, education
   projects.ts      Case studies
+  sites.ts         Live client sites and their preview stills
 public/
   shots/           Product screenshots
+  previews/        Captured stills of the live sites
   cv/              Downloadable CV
 ```
 
@@ -79,6 +91,10 @@ Nothing about the copy requires touching a component.
   `diagram` to one of the keys in `diagramMap`, or `null` for none.
 - **A new diagram** — add a component to `components/Diagrams.tsx` using the
   `Box`, `Arrow` and `Sheet` primitives, then register it in `diagramMap`.
+- **A live site card** — add an entry to `liveSites` in `content/sites.ts` with
+  a still in `public/previews/`. Set `embeddable` from the site's real response
+  headers, not by assumption; a site sending `X-Frame-Options: DENY` must be
+  `false` or its card renders an empty frame.
 - **Skills, metrics, education, links** — `content/site.ts`.
 - **The CV** — replace the PDF in `public/cv/` keeping the filename, or update
   `site.links.cv`.
