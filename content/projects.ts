@@ -118,11 +118,11 @@ export const projects: readonly Project[] = [
       'One form where there were several screens, with no loss of validation strictness.',
     ],
     diagram: 'withdrawal',
-    shots: [],
-    links: [],
+    shots: [{ src: '/previews/victoi.jpg', alt: 'The Victoi product site home page' }],
+    links: [{ label: 'victoi.ai', href: 'https://victoi.ai' }],
     confidential:
-      'Screens not shown. The product is a live financial application and its ' +
-      'interface is not mine to publish.',
+      'The still is the public product site. In-app screens are not shown: it is ' +
+      'a live financial application and its interface is not mine to publish.',
   },
 
   {

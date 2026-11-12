@@ -7,8 +7,9 @@ export type LiveSite = {
   blurb: string;
   stack: readonly string[];
   preview: string;
-  /** Which pen colours this card. 1 violet, 2 blue, 3 green, 4 magenta. */
-  pen: 1 | 2 | 3 | 4;
+  /** Which pen colours this card. 1 violet, 2 blue, 3 green, 4 magenta, 5 gold.
+   *  Cards with a case study take that sheet's pen, so the pair reads as one. */
+  pen: 1 | 2 | 3 | 4 | 5;
   /** Anchor of the case study covering this site, when one exists. */
   caseStudy?: string;
   /**
@@ -33,7 +34,7 @@ export const liveSites: readonly LiveSite[] = [
     stack: ['React', 'TypeScript', 'Node.js', 'PostgreSQL'],
     preview: '/previews/careflow.jpg',
     caseStudy: '#careflow',
-    pen: 2,
+    pen: 3,
     embeddable: true,
   },
   {
@@ -51,6 +52,23 @@ export const liveSites: readonly LiveSite[] = [
     embeddable: false,
   },
   {
+    id: 'victoi',
+    name: 'Victoi',
+    host: 'victoi.ai',
+    url: 'https://victoi.ai',
+    blurb:
+      'Product site for the platform whose mobile front end I lead: accounts, ' +
+      'money, cards, pooled funds and events in one app. Dark, video-led, with ' +
+      'the phone running real captures of the product.',
+    stack: ['Next.js', 'React', 'TypeScript', 'Motion'],
+    preview: '/previews/victoi.jpg',
+    caseStudy: '#victoi',
+    pen: 2,
+    // Sits behind Cloudflare bot protection and the one X-Frame-Options seen
+    // was SAMEORIGIN, so a live embed would likely render a challenge page.
+    embeddable: false,
+  },
+  {
     id: 'unique-hospital',
     name: 'Unique Hospital',
     host: 'hospital.uniquecorporation.org',
@@ -60,7 +78,7 @@ export const liveSites: readonly LiveSite[] = [
       'French throughout, with appointment booking and a light and dark theme.',
     stack: ['React', 'TypeScript', 'i18n', 'Responsive'],
     preview: '/previews/unique-hospital.jpg',
-    pen: 3,
+    pen: 4,
     embeddable: true,
   },
   {
@@ -73,7 +91,7 @@ export const liveSites: readonly LiveSite[] = [
       'organisation, built around a long editorial scroll and a full-bleed hero.',
     stack: ['React', 'TypeScript', 'CMS content', 'Responsive'],
     preview: '/previews/intentional-woman.jpg',
-    pen: 4,
+    pen: 5,
     embeddable: true,
   },
 ] as const;

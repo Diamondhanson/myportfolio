@@ -30,6 +30,8 @@
   --pen-3-text: #04805d;
   --pen-4: #ff2d78;
   --pen-4-text: #d81b5f;
+  --pen-5: #eab308;
+  --pen-5-text: #9a6b04;
 
   --draw: #14171c;
 
@@ -64,6 +66,8 @@
     --pen-3-text: #5cefbd;
     --pen-4: #ff79ab;
     --pen-4-text: #ff96bf;
+    --pen-5: #fbbf24;
+    --pen-5-text: #fcd34d;
 
     --draw: #8dcbf0;
   }
@@ -91,6 +95,8 @@
   --pen-3-text: #5cefbd;
   --pen-4: #ff79ab;
   --pen-4-text: #ff96bf;
+  --pen-5: #fbbf24;
+  --pen-5-text: #fcd34d;
 
   --draw: #8dcbf0;
 }

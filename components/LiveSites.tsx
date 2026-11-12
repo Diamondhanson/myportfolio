@@ -97,13 +97,17 @@ function SiteCard({ site }: { site: LiveSite }) {
 }
 
 export function LiveSites() {
+  const embeddableCount = liveSites.filter((s) => s.embeddable).length;
+
   return (
     <section className="section" id="sites">
       <div className="shell">
         <SectionHead num="02" title="Shipped and online" />
         <p className="lede sitesLede">
-          Four of these are public. Press <em>Load live</em> on any card to replace the
-          still with the running site.
+          {liveSites.length} public sites. Press <em>Load live</em> to swap a still for
+          the running site, on the {embeddableCount} that allow being framed. The rest
+          refuse it, which is the correct setting for them and the reason they stay
+          stills rather than broken frames.
         </p>
 
         <div className="siteGrid">
