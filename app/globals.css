@@ -1,0 +1,379 @@
+/* ============================================================
+   Blueprint design system
+   Light  : draughtsman's paper, graphite ink, red pencil accent
+   Dark   : true cyanotype blueprint, navy ground, cyan linework
+   ============================================================ */
+
+:root {
+  --paper: #f2f1ec;
+  --paper-raised: #f8f7f4;
+  --grid-fine: rgba(20, 23, 28, 0.045);
+  --grid-major: rgba(20, 23, 28, 0.085);
+  --ink: #14171c;
+  --ink-muted: #5c6066;
+  --ink-faint: #8b9099;
+  --rule: rgba(20, 23, 28, 0.16);
+  --rule-strong: rgba(20, 23, 28, 0.42);
+  --accent: #c2410c;
+  --accent-soft: rgba(194, 65, 12, 0.1);
+  --draw: #14171c;
+
+  --font-display: var(--font-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-plex), ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --maxw: 1180px;
+  --gutter: clamp(1rem, 4vw, 3.5rem);
+  --sheet-radius: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --paper: #0b1a2b;
+    --paper-raised: #0f2338;
+    --grid-fine: rgba(141, 203, 240, 0.07);
+    --grid-major: rgba(141, 203, 240, 0.13);
+    --ink: #e8f2fa;
+    --ink-muted: #9fb8cc;
+    --ink-faint: #6d8aa3;
+    --rule: rgba(141, 203, 240, 0.22);
+    --rule-strong: rgba(141, 203, 240, 0.55);
+    --accent: #ff9e5e;
+    --accent-soft: rgba(255, 158, 94, 0.12);
+    --draw: #8dcbf0;
+  }
+}
+
+:root[data-theme='dark'] {
+  --paper: #0b1a2b;
+  --paper-raised: #0f2338;
+  --grid-fine: rgba(141, 203, 240, 0.07);
+  --grid-major: rgba(141, 203, 240, 0.13);
+  --ink: #e8f2fa;
+  --ink-muted: #9fb8cc;
+  --ink-faint: #6d8aa3;
+  --rule: rgba(141, 203, 240, 0.22);
+  --rule-strong: rgba(141, 203, 240, 0.55);
+  --accent: #ff9e5e;
+  --accent-soft: rgba(255, 158, 94, 0.12);
+  --draw: #8dcbf0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--paper);
+  /* The drawing grid. Fine squares with a heavier line every fifth. */
+  background-image:
+    linear-gradient(var(--grid-major) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-major) 1px, transparent 1px),
+    linear-gradient(var(--grid-fine) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-fine) 1px, transparent 1px);
+  background-size:
+    100px 100px,
+    100px 100px,
+    20px 20px,
+    20px 20px;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ---------- Layout ---------- */
+
+.shell {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: clamp(4rem, 10vw, 8rem);
+  position: relative;
+}
+
+/* ---------- Typographic primitives ---------- */
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0;
+}
+
+.annotation {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 0;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.6rem, 9vw, 6rem);
+  letter-spacing: -0.04em;
+}
+
+h2 {
+  font-size: clamp(1.9rem, 4.6vw, 3.1rem);
+}
+
+h3 {
+  font-size: clamp(1.3rem, 2.6vw, 1.75rem);
+}
+
+p {
+  margin: 0 0 1rem;
+  text-wrap: pretty;
+}
+
+.lede {
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  line-height: 1.55;
+  color: var(--ink-muted);
+  max-width: 62ch;
+}
+
+.prose {
+  color: var(--ink-muted);
+  max-width: 68ch;
+}
+
+/* ---------- Section heading with sheet rule ---------- */
+
+.sectionHead {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 1rem;
+}
+
+.sectionHead .num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  flex: none;
+  padding-top: 0.35rem;
+}
+
+.sectionHead .fill {
+  flex: 1;
+  border-bottom: 1px dashed var(--rule);
+  translate: 0 -0.35rem;
+}
+
+/* ---------- Dimension line (the measured bracket) ---------- */
+
+.dim {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.dim::before,
+.dim::after {
+  content: '';
+  height: 1px;
+  background: var(--rule-strong);
+  flex: 1;
+  min-width: 1.5rem;
+  position: relative;
+}
+
+/* ---------- Title block, borrowed from technical drawings ---------- */
+
+.titleBlock {
+  border: 1px solid var(--rule);
+  border-radius: var(--sheet-radius);
+  background: var(--paper-raised);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+}
+
+.titleBlock > div {
+  padding: 0.85rem 1rem;
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.titleBlock > div:last-child {
+  border-right: 0;
+}
+
+.titleBlock dt {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin: 0 0 0.3rem;
+}
+
+.titleBlock dd {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.15rem;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--sheet-radius);
+  background: transparent;
+  color: var(--ink);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+.btn--accent {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.btn--accent:hover,
+.btn--accent:focus-visible {
+  background: var(--accent);
+  color: var(--paper);
+  border-color: var(--accent);
+}
+
+:where(a, button, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--sheet-radius);
+}
+
+/* ---------- Reveal on scroll ---------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.reveal[data-shown='true'] {
+  opacity: 1;
+  transform: none;
+}
+
+/* Lines that ink themselves in once scrolled into view. */
+.drawable path,
+.drawable line,
+.drawable polyline,
+.drawable rect,
+.drawable circle {
+  stroke-dasharray: var(--len, 1200);
+  stroke-dashoffset: var(--len, 1200);
+  transition: stroke-dashoffset 1.4s cubic-bezier(0.3, 0.6, 0.2, 1);
+}
+
+.drawable[data-shown='true'] path,
+.drawable[data-shown='true'] line,
+.drawable[data-shown='true'] polyline,
+.drawable[data-shown='true'] rect,
+.drawable[data-shown='true'] circle {
+  stroke-dashoffset: 0;
+}
+
+.drawable text,
+.drawable .noDraw {
+  opacity: 0;
+  transition: opacity 0.5s ease 0.75s;
+  stroke-dasharray: none;
+  stroke-dashoffset: 0;
+}
+
+.drawable[data-shown='true'] text,
+.drawable[data-shown='true'] .noDraw {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .drawable path,
+  .drawable line,
+  .drawable polyline,
+  .drawable rect,
+  .drawable circle,
+  .drawable text,
+  .drawable .noDraw {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+}
