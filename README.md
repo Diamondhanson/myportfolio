@@ -87,8 +87,11 @@ Nothing about the copy requires touching a component.
 
 - `prefers-reduced-motion` is honoured: every reveal and stroke animation is
   disabled rather than shortened.
-- The page is readable with JavaScript disabled. Revealed elements default to
-  visible, so a failed hydration degrades to a static page, not a blank one.
+- The page is readable with JavaScript disabled. The stylesheet only hides a
+  revealable block once an inline script has proved scripting is available, and
+  a 2.5 second failsafe un-hides everything if the reveal machinery never runs.
+  A bundle that fails to load therefore degrades to a static page, not a blank
+  one. Verified by removing both classes and confirming nothing stays hidden.
 - The email address is assembled in the browser from two halves and never
   appears whole in the served HTML. That is a speed bump against casual
   scrapers, not real protection, and is described as such.

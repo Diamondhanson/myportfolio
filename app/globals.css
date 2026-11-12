@@ -313,7 +313,12 @@ p {
 
 /* ---------- Reveal on scroll ---------- */
 
-.reveal {
+/* Hidden only once we know scripting is available AND the reveal machinery is
+   running. `.js` is set by an inline script; `.reveal-armed` is set by the same
+   script's failsafe, which un-arms everything if hydration never happens. With
+   JavaScript off, or if the bundle fails, nothing is hidden and the page simply
+   reads as a static document. */
+.js .reveal {
   opacity: 0;
   transform: translateY(18px);
   transition:
@@ -321,17 +326,18 @@ p {
     transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-.reveal[data-shown='true'] {
+.js .reveal[data-shown='true'],
+.js.reveal-disarmed .reveal {
   opacity: 1;
   transform: none;
 }
 
 /* Lines that ink themselves in once scrolled into view. */
-.drawable path,
-.drawable line,
-.drawable polyline,
-.drawable rect,
-.drawable circle {
+.js .drawable path,
+.js .drawable line,
+.js .drawable polyline,
+.js .drawable rect,
+.js .drawable circle {
   stroke-dasharray: var(--len, 1200);
   stroke-dashoffset: var(--len, 1200);
   transition: stroke-dashoffset 1.4s cubic-bezier(0.3, 0.6, 0.2, 1);
@@ -341,12 +347,17 @@ p {
 .drawable[data-shown='true'] line,
 .drawable[data-shown='true'] polyline,
 .drawable[data-shown='true'] rect,
-.drawable[data-shown='true'] circle {
+.drawable[data-shown='true'] circle,
+.js.reveal-disarmed .drawable path,
+.js.reveal-disarmed .drawable line,
+.js.reveal-disarmed .drawable polyline,
+.js.reveal-disarmed .drawable rect,
+.js.reveal-disarmed .drawable circle {
   stroke-dashoffset: 0;
 }
 
-.drawable text,
-.drawable .noDraw {
+.js .drawable text,
+.js .drawable .noDraw {
   opacity: 0;
   transition: opacity 0.5s ease 0.75s;
   stroke-dasharray: none;
@@ -354,7 +365,9 @@ p {
 }
 
 .drawable[data-shown='true'] text,
-.drawable[data-shown='true'] .noDraw {
+.drawable[data-shown='true'] .noDraw,
+.js.reveal-disarmed .drawable text,
+.js.reveal-disarmed .drawable .noDraw {
   opacity: 1;
 }
 

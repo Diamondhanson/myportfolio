@@ -64,15 +64,33 @@ export const viewport: Viewport = {
  * wrong ground colour. Kept tiny and defensive: private browsing can throw.
  */
 const themeBootstrap = `
+var d = document.documentElement;
 try {
   var t = localStorage.getItem('bp-theme');
-  if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+  if (t === 'light' || t === 'dark') d.dataset.theme = t;
 } catch (e) {}
+
+// Only now, with scripting proven, do we let the stylesheet hide anything.
+d.classList.add('js');
+
+// Failsafe: if React never gets far enough to reveal the page (a bundle that
+// fails to load, a hydration error, a browser we did not anticipate), show
+// everything anyway. A visible page beats a faithful animation.
+setTimeout(function () {
+  if (!d.querySelector('.reveal[data-shown="true"]')) d.classList.add('reveal-disarmed');
+}, 2500);
 `;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${grotesk.variable} ${plexMono.variable}`}>
+    // The bootstrap script below sets data-theme before React hydrates, which is
+    // the whole point of it. That attribute is therefore expected to differ from
+    // the server HTML, and only on this element.
+    <html
+      lang="en"
+      className={`${grotesk.variable} ${plexMono.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
       </head>
