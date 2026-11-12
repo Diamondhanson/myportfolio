@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Space_Grotesk, IBM_Plex_Mono } from 'next/font/google';
 import { site } from '@/content/site';
+import { siteUrl } from '@/lib/site-url';
 import './globals.css';
 import './sections.css';
 
@@ -22,7 +23,8 @@ const description =
   'software in TypeScript, React, React Native, Node and PostgreSQL. Founder of SeamFlow.';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://bambot.dev'),
+  metadataBase: siteUrl(),
+  alternates: { canonical: '/' },
   title: {
     default: `${site.name} · ${site.role}`,
     template: `%s · ${site.shortName}`,
@@ -41,8 +43,11 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: site.name, url: site.links.github }],
   creator: site.name,
+  // The card image itself is app/opengraph-image.tsx; Next adds the og:image
+  // tags from that file, so they are deliberately absent here.
   openGraph: {
     type: 'website',
+    url: '/',
     title: `${site.name} · ${site.role}`,
     description,
     siteName: site.name,
