@@ -9,6 +9,8 @@ export type LiveSite = {
   preview: string;
   /** Which pen colours this card. 1 violet, 2 blue, 3 green, 4 magenta. */
   pen: 1 | 2 | 3 | 4;
+  /** Anchor of the case study covering this site, when one exists. */
+  caseStudy?: string;
   /**
    * Whether the site permits being framed. Checked against the live response
    * headers, not assumed: seamflowtech.com sends X-Frame-Options: DENY and
@@ -30,6 +32,7 @@ export const liveSites: readonly LiveSite[] = [
       'Bilingual and built to keep working offline.',
     stack: ['React', 'TypeScript', 'Node.js', 'PostgreSQL'],
     preview: '/previews/careflow.jpg',
+    caseStudy: '#careflow',
     pen: 2,
     embeddable: true,
   },
@@ -43,6 +46,7 @@ export const liveSites: readonly LiveSite[] = [
       'Arabic. Static-rendered on Next.js and deployed on Vercel.',
     stack: ['Next.js', 'TypeScript', 'i18n', 'Vercel'],
     preview: '/previews/seamflow-web.jpg',
+    caseStudy: '#seamflow',
     pen: 1,
     embeddable: false,
   },

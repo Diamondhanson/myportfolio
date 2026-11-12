@@ -72,9 +72,16 @@ function SiteCard({ site }: { site: LiveSite }) {
       <div className="siteBody">
         <div className="siteTitleRow">
           <h3>{site.name}</h3>
-          <a href={site.url} target="_blank" rel="noopener noreferrer" className="siteVisit">
-            Visit<span aria-hidden> ↗</span>
-          </a>
+          <span className="siteActions">
+            {site.caseStudy ? (
+              <a href={site.caseStudy} className="siteVisit siteVisit--muted">
+                Case study<span aria-hidden> ↑</span>
+              </a>
+            ) : null}
+            <a href={site.url} target="_blank" rel="noopener noreferrer" className="siteVisit">
+              Visit<span aria-hidden> ↗</span>
+            </a>
+          </span>
         </div>
         <p className="siteBlurb">{site.blurb}</p>
         <p className="siteStack">

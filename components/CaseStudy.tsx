@@ -10,6 +10,8 @@ export function CaseStudy({ project }: { project: Project }) {
   // number, the rules, the diagram's accent strokes and the links together,
   // so the section stays coherent while the page gains colour.
   const pen = (Number(project.sheet) - 1) % 4 + 1;
+  // One still means a landscape site capture rather than a row of phones.
+  const wide = project.shots.length === 1;
 
   return (
     <article
@@ -113,15 +115,21 @@ export function CaseStudy({ project }: { project: Project }) {
           {Diagram ? <Diagram /> : null}
 
           {project.shots.length > 0 ? (
-            <Reveal className="shots" delay={120}>
+            <Reveal
+              className={wide ? 'shots shots--single' : 'shots'}
+              delay={120}
+            >
               {project.shots.map((shot, i) => (
                 <figure className="shot" key={shot.src} data-i={i}>
+                  {/* Phone screenshots come in threes and are portrait; a lone
+                      still is a landscape site capture and gets the full column,
+                      so the two cases need different intrinsic sizes. */}
                   <Image
                     src={shot.src}
                     alt={shot.alt}
-                    width={270}
-                    height={480}
-                    sizes="(max-width: 700px) 42vw, 200px"
+                    width={wide ? 800 : 270}
+                    height={wide ? 500 : 480}
+                    sizes={wide ? '(max-width: 900px) 92vw, 540px' : '(max-width: 700px) 42vw, 200px'}
                   />
                 </figure>
               ))}

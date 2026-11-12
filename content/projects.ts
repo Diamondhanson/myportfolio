@@ -126,35 +126,40 @@ export const projects: readonly Project[] = [
   },
 
   {
-    id: 'hospital',
+    id: 'careflow',
     sheet: '03',
-    name: 'Hospital management system',
-    kind: 'Client build · healthcare operations',
+    name: 'CareFlow',
+    kind: 'Hospital operations platform · built for a clinic, now a product',
     role: 'Sole developer',
-    period: '2023',
-    stack: ['React', 'TypeScript', 'Node.js', 'PostgreSQL'],
+    period: '2023 to present',
+    stack: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'Offline-first', 'i18n'],
     summary:
-      'Records, scheduling and billing for a working clinic, delivered solo from ' +
-      'requirements through to handover and training.',
+      'Every patient from arrival to discharge on one shared record, with a live ' +
+      'board showing where each of them currently is.',
     problem:
-      'Patient records, appointments and billing lived in separate places, which ' +
-      'meant the same information was entered more than once and the three were ' +
-      'regularly out of step with each other.',
+      'Patient records, appointments and billing lived in separate places, so the ' +
+      'same person was entered more than once and the three were regularly out of ' +
+      'step. Nobody could answer the simplest operational question, which is who is ' +
+      'in the building right now and what are they waiting on.',
     approach: [
-      'Gathered requirements directly from the staff who would use it, not from a brief.',
-      'Modelled patients, visits, scheduling and billing as one relational schema so a single visit is one record rather than three.',
-      'Role-based access, because a receptionist and a clinician must not see the same thing.',
-      'Delivered with handover documentation and training rather than a repository link.',
+      'Modelled patients, visits, scheduling and billing as one relational schema, so a single visit is one record with relations rather than three records that can disagree.',
+      'Gathered requirements directly from the staff who would use it, not from a written brief.',
+      'Built a live board across intake, consultation, treatment and discharge, so the state of the floor is visible at a glance instead of assembled by asking people.',
+      'Extended it to cover tests, medication, beds and reports, keeping all of it against the same visit record.',
+      'Role-based access, because a receptionist and a clinician must not see the same thing, with each hospital’s data isolated from every other.',
+      'Offline-capable and bilingual in French and English, because neither the connection nor the language can be assumed in a Cameroonian hospital.',
     ],
     outcome: [
-      'One system replacing three disconnected ones.',
+      'Live at careflowoperation.com and open for hospital accounts.',
+      'One system replacing three disconnected ones, and the paper between them.',
       'Handed over to staff who had not used software like it before.',
     ],
     diagram: 'records',
-    shots: [],
-    links: [],
+    shots: [{ src: '/previews/careflow.jpg', alt: 'The CareFlow home page and live status board' }],
+    links: [{ label: 'careflowoperation.com', href: 'https://www.careflowoperation.com' }],
     confidential:
-      'Client not named and screens not shown. The system holds patient data.',
+      'No patient data or signed-in screens shown. The public product site is ' +
+      'linked instead.',
   },
 
   {

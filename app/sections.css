@@ -953,3 +953,25 @@
   gap: 0.35rem;
   margin: 0.2rem 0 0;
 }
+
+/* A single landscape still gets the full column, not a third of one. */
+.shots--single {
+  grid-template-columns: 1fr;
+}
+
+.shots--single .shot img {
+  aspect-ratio: 8 / 5;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.siteActions {
+  display: flex;
+  align-items: baseline;
+  gap: 0.85rem;
+  flex: none;
+}
+
+.siteVisit--muted {
+  color: var(--ink-faint);
+}
